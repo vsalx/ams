@@ -9,3 +9,7 @@ University project: Appointment reservation system for dentists
 4. Checkout develop branch.
 5. Run 'docker-compose build' in the cmd in the root folder of the branch. Wait a lot of minutes.
 6. Run 'docker-compose up' and open localhost in the browser. Enjoy!
+
+
+#Docs
+1. Er Diagram - https://www.lucidchart.com/documents/edit/753600ab-f40e-499f-aa96-ebd6d5eb805f

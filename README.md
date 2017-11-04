@@ -11,5 +11,5 @@ University project: Appointment reservation system for dentists
 6. Run 'docker-compose up' and open localhost in the browser. Enjoy!
 
 
-#Docs
+# Docs
 1. Er Diagram - https://www.lucidchart.com/documents/edit/753600ab-f40e-499f-aa96-ebd6d5eb805f

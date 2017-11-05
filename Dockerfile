@@ -23,3 +23,9 @@ EXPOSE 80
 
 ENTRYPOINT [ "/usr/sbin/apache2" ]
 CMD ["-D", "FOREGROUND"]
+
+FROM php:7.0-apache
+
+# PHP extensions
+
+RUN docker-php-ext-install pdo pdo_mysql

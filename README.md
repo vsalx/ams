@@ -10,6 +10,16 @@ University project: Appointment reservation system for dentists
 5. Run 'docker-compose build' in the cmd in the root folder of the branch. Wait a lot of minutes.
 6. Run 'docker-compose up' and open localhost in the browser. Enjoy!
 
-
 # Docs
 1. Er Diagram - https://www.lucidchart.com/documents/edit/753600ab-f40e-499f-aa96-ebd6d5eb805f
+
+# DB Maintenance
+
+1. Migration
+- open cmd and list docker containers with
+'docker containers ls'
+- get the id of the web server container and execute:
+'docker exec -it {id} /bin/bash'
+this will open the console inside the docker container
+- now run to begin migration:
+'php artisan migrate'

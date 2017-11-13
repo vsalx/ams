@@ -17,7 +17,7 @@ University project: Appointment reservation system for dentists
 
 1. Migration
 - open cmd and list docker containers with
-'docker containers ls'
+'docker ps'
 - get the id of the web server container and execute:
 'docker exec -it {id} /bin/bash'
 this will open the console inside the docker container

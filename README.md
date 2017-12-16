@@ -1,8 +1,7 @@
-# ams
+# AMS (Appointment Management System)
 University project: Appointment reservation system for dentists
 
-
-# How to run on Windows
+# How to run on Windows (first time only)
 1. Virtualization of the processor must be enabled. See point 4 of the following link: https://docs-old.fedoraproject.org/en-US/Fedora/13/html/Virtualization_Guide/sect-Virtualization-Troubleshooting-Enabling_Intel_VT_and_AMD_V_virtualization_hardware_extensions_in_BIOS.html
 2. Enaple Hyper-V in Windows: https://blogs.technet.microsoft.com/canitpro/2015/09/08/step-by-step-enabling-hyper-v-for-use-on-windows-10/
 3. Install and run docker - https://www.docker.com/docker-windows.
@@ -17,9 +16,26 @@ University project: Appointment reservation system for dentists
 
 1. Migration
 - open cmd and list docker containers with
-'docker ps'
+```
+docker ps
+```
 - get the id of the web server container and execute:
-'docker exec -it {id} /bin/bash'
+```
+docker exec -it {id} /bin/bash
+```
 this will open the console inside the docker container
 - now run to begin migration:
-'php artisan migrate'
+```
+php artisan migrate
+```
+
+# CSS compile
+We are using SASS so we need to translate sass files to css first.
+In the project's folder run the following command to translate your changes to css:
+```
+npm run dev
+```
+If you don't have npm, install it, and then run in the project's folder
+```
+npm install
+```

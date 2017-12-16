@@ -12,8 +12,16 @@
 */
 use App\User;
 
-Route::get('/', function () {
+Route::get('/user', function () {
     //return view('welcome');
 	$users = User::all();
 	return $users;
+});
+
+Route::get('/', function() {
+    return view('base');
+});
+
+Route::get('/login', function() {
+    return view('login/login');
 });

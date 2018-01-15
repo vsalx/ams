@@ -18,24 +18,8 @@ composer install
 ```
 6. Find php.ini file, if installed with choco it should be in C:\tools\phpXX(XX is the php version) and ensure that 
 ```;extension=pdo_mysql``` is not commented out, by removing the ';' in front.
-7. Open \ams\config\database.php and find mysql settings, set the host to be localhost. Should look like this:
-```
-        'mysql' => [
-            'driver' => 'mysql',
-            'host' => 'localhost',
-            'port' => 3306,
-            'database' => 'ams',
-            'username' => 'ams',
-            'password' => 'ams123',
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-            'strict' => false,
-            'engine' => null,
-        ]
-```
-8. Open cmd in the directory of the project and run ```php artisan migrate``` to create the tables in the schema.
-9. In the same cmd window and directory run ```php artisan serve``` and open localhost:8000 to verify the project is up.
+7. Open cmd in the directory of the project and run ```php artisan migrate``` to create the tables in the schema.
+8. In the same cmd window and directory run ```php artisan serve``` and open localhost:8000 to verify the project is up.
 
 # CSS compile
 We are using SASS so we need to translate sass files to css first.
@@ -48,7 +32,7 @@ If you don't have npm, install it, and then run in the project's folder
 npm install
 ```
 
-# How to run on Windows with Docker (first time only)
+# NOT AN OPTION ANYMORE! How to run on Windows with Docker (first time only)
 1. Virtualization of the processor must be enabled. See point 4 of the following link: https://docs-old.fedoraproject.org/en-US/Fedora/13/html/Virtualization_Guide/sect-Virtualization-Troubleshooting-Enabling_Intel_VT_and_AMD_V_virtualization_hardware_extensions_in_BIOS.html
 2. Enaple Hyper-V in Windows: https://blogs.technet.microsoft.com/canitpro/2015/09/08/step-by-step-enabling-hyper-v-for-use-on-windows-10/
 3. Install and run docker - https://www.docker.com/docker-windows.

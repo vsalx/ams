@@ -1,20 +1,6 @@
-$dark-grey: #3b3b3b;
-$minty-green-pale: #ccd9d0;
-$minty-green: #57c47b;
-
-$body-bg: $minty-green-pale;
-$menu-bg: $dark-grey;
-$menu-border: $minty-green;
-$menu-text: $minty-green;
-
-$login-bg: $dark-grey;
-$login-text: $minty-green;
-$login-border: $minty-green;
-$login-input: $minty-green-pale;
-$login-form-text: $dark-grey;
-$login-form-btn-bg: $minty-green;
 
 // Body
+$body-bg: #f5f8fa;
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);

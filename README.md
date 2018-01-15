@@ -67,7 +67,7 @@ npm install
             'prefix' => '',
             'strict' => false,
             'engine' => null,
-     
+```
 6. Run 'docker-compose build' in the cmd in the root folder of the branch. Wait a lot of minutes.
 7. Run 'docker-compose up' and open localhost in the browser. Enjoy!
 

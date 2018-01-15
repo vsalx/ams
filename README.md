@@ -53,8 +53,23 @@ npm install
 2. Enaple Hyper-V in Windows: https://blogs.technet.microsoft.com/canitpro/2015/09/08/step-by-step-enabling-hyper-v-for-use-on-windows-10/
 3. Install and run docker - https://www.docker.com/docker-windows.
 4. Checkout develop branch.
-5. Run 'docker-compose build' in the cmd in the root folder of the branch. Wait a lot of minutes.
-6. Run 'docker-compose up' and open localhost in the browser. Enjoy!
+5. Open \ams\config\database.php and check if they look like this:
+```
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => 'ams_db_1',
+            'port' => 3306,
+            'database' => 'ams',
+            'username' => 'ams',
+            'password' => 'ams123',
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+     
+6. Run 'docker-compose build' in the cmd in the root folder of the branch. Wait a lot of minutes.
+7. Run 'docker-compose up' and open localhost in the browser. Enjoy!
 
 # DB Maintenance with Docker
 

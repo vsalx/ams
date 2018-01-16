@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -37,6 +38,28 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    function get_enum_values($table, $field)
+    {
+        //todo maybe make this smarter
+        $test=DB::select(DB::raw("show columns from {$table} where field = '{$field}'"));
+
+        preg_match('/^enum\((.*)\)$/', $test[0]->Type, $matches);
+        foreach( explode(',', $matches[1]) as $value )
+        {
+            $typeEnum[] = trim( $value, "'" );
+        }
+
+        return $typeEnum;
+
+    }
+
+    //override
+    public function showRegistrationForm()
+    {
+        $enumTypes = $this->get_enum_values('users', 'type');
+        return view('auth.register')->with('enumTypes', $enumTypes);
     }
 
     /**
@@ -78,22 +101,5 @@ class RegisterController extends Controller
 
         return view('myForm',compact('users'));
 
-    }
-
-    function gender_select($default_value='') {
-      $select = '<select name="gender">';
-      $options = array('Unspecified','Male','Female',);
-      foreach($options as $option) {
-        $select .= write_option($option, $option, $default_value);
-      }
-      $select .= '</select>';
-      return $select;
-    }
-
-    function write_option($value, $display, $default_value='') {
-      $option = '<option value="'.$value.'"';
-      $option .= ($default_value == $value) ? ' SELECTED' : '';
-      $option .= '>'.$display.'</option>';
-      return $option;
     }
 }

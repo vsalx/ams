@@ -66,6 +66,34 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'type' => $data['type'],
         ]);
+    }
+
+    public function myform()
+
+    {
+
+        $users = User::pluck('name', 'id');
+
+        return view('myForm',compact('users'));
+
+    }
+
+    function gender_select($default_value='') {
+      $select = '<select name="gender">';
+      $options = array('Unspecified','Male','Female',);
+      foreach($options as $option) {
+        $select .= write_option($option, $option, $default_value);
+      }
+      $select .= '</select>';
+      return $select;
+    }
+
+    function write_option($value, $display, $default_value='') {
+      $option = '<option value="'.$value.'"';
+      $option .= ($default_value == $value) ? ' SELECTED' : '';
+      $option .= '>'.$display.'</option>';
+      return $option;
     }
 }

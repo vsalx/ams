@@ -56,8 +56,19 @@
                         <div class="form-group">
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
-                            <div class="col-md-6">
+                                <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div  class="form-group">
+                            <label for="type" class="col-md-4 control-label">Category of user </label>
+                            <div class="col-md-6">
+                              <select name="type" class="form-control" type="type">
+                                  <option value="1">Dentist</option>
+                                  <option value="2">Ortodont</option>
+                                  <option value="3">Client</option>
+                            </select>
                             </div>
                         </div>
 

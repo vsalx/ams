@@ -15,6 +15,17 @@ Route::get('/', function () {
     return view('home');
 });
 
+
+Route::get('/appointment', function () {
+    return view('appointment');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'int'], function()
+{
+    Route::get('/schedule/{dentistId}', 'InternalController@getSchedulesByDentistId');
+    Route::get('/appointment/{dentistId}/{date}', 'InternalController@getScheduledAppointmentsByDentistId');
+});

@@ -17,7 +17,9 @@ class CreateAppointmentsTable extends Migration
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
             $table->integer('dentist_id')->unsigned();
-            $table->integer('cancelled_by')->unsigned();
+            $table->date('appointment_date');
+            $table->time('appointment_time');
+            $table->integer('cancelled_by')->unsigned()->default(null)->nullable();
             $table->timestamp('cancelled_on')->default(null)->nullable();
             $table->boolean('seen')->default(false);
             $table->timestamps();

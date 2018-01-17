@@ -16,8 +16,9 @@ class CreateWorkSchedulesTable extends Migration
         Schema::create('work_schedules', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('dentist_id')->unsigned();
-            $table->datetime('start_time');
-            $table->datetime('end_time');
+            $table->date('work_date');
+            $table->time('start_time');
+            $table->time('end_time');
 
             $table->foreign('dentist_id')->references('id')->on('users');
         });

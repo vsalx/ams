@@ -16,9 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/appointment', function () {
-    return view('appointment');
-});
+Route::get('/appointment/dentist/{dentistId}', 'AppointmentController@getAppointmentView');
 
 Auth::routes();
 

@@ -1,5 +1,6 @@
 var url = "http://localhost:8000";
 var schedules = [];
+var dentistId;
 
 $(document).ready(function($){
     calendarInit();
@@ -7,12 +8,14 @@ $(document).ready(function($){
 
 function calendarInit()
 {
-    $.get(url+"/int/schedule/" + 2, function(data) {
+    dentistId = $('#dentist span').attr('id');
+    $.get(url+"/int/schedule/" + dentistId, function(data) {
         $.each(data, function(index, value) {
             schedules.push(value);
         });
 
         getHours(new Date());
+        $('#selected-date').val(moment().format('DD.MM.YYYY'));
         //My function to intialize the datepicker
         $('#booking-calendar').datepicker({
             inline: true,
@@ -49,10 +52,11 @@ function highlightDays(date)
 function getHours(date)
 {
     var dateSelected = moment(date).startOf('d');
+    $('#selected-date').val(dateSelected.format('DD.MM.YYYY'));
     //calculate the hours and after that remove already taken
     var schedule = $.grep(schedules, function(s){return moment(s.work_date).isSame(dateSelected)});
     var hours = [];
-    $.get(url+"/int/appointment/2/"+date, function(data) {
+    $.get(url+"/int/appointment/"+dentistId+"/"+date, function(data) {
         var reservedHours = [];
         $.each(data, function(index, value) {
             reservedHours.push(moment(value.appointment_date + 'T' + value.appointment_time));
@@ -81,7 +85,11 @@ function getHours(date)
         document.getElementById('daySelect').innerHTML = "Свободни часове за " + dateSelected.format("DD.MM.YYYY");
         $('#dayTimes').empty();
         $.each(hours, function(i, v){
-            $("#dayTimes").append('<a>' + v + '</a><br>');
+            $("#dayTimes").append('<a id="'+ v +'" onclick="selectTime(this.id)">' + v + '</a><br>');
         });
     });
+}
+
+function selectTime(timeId){
+    $('#selected-time').val(timeId);
 }

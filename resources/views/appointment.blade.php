@@ -20,7 +20,7 @@
                                         Изберете дата от календара:
                                     </div>
                                     <div class="panel-body">
-                                        <div id="booking-calendar"></div>
+                                        <div id="appointment-calendar"></div>
                                     </div>
                                 </div>
                             </div>
@@ -29,22 +29,23 @@
                                     <div class="panel-heading" id="daySelect">
                                     </div>
                                     <div class="panel-body">
-                                        <p id="dayTimes"></p>
+                                        <p id="day-times"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <form>
+                                <form method="post" action="/dentist/{{$dentist->id}}/appointment">
+                                    {{ csrf_field() }}
                                     <div class="form-group row">
                                         <label for="selected-date">Дата:</label>
-                                        <input id="selected-date" disabled="true" class="form-control" />
+                                        <input id="selected-date" class="form-control" name="date" type="text" readonly />
                                     </div>
                                     <div class="form-group row">
                                         <label for="selected-time">Час:</label>
-                                        <input id="selected-time" disabled="true" class="form-control" />
+                                        <input id="selected-time" class="form-control" name="time" type="text" readonly />
                                     </div>
                                     <div class="form-group row">
-                                    <button id="saveAppointment" type="button" class="btn btn-primary">Запази</button>
+                                    <button id="create-appointment" type="submit" class="btn btn-primary">Запази</button>
                                     </div>
                                 </form>
                             </div>

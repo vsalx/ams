@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('/appointment/dentist/{dentistId}', 'AppointmentController@getAppointmentView');
+Route::group(['prefix' => 'dentist'], function(){
+    Route::get('/{dentistId}/appointment', 'DentistAppointmentController@getAppointmentView');
+    Route::post('/{dentistId}/appointment', 'DentistAppointmentController@createAppointment');
+});
+
 
 Auth::routes();
 

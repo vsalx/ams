@@ -15,9 +15,9 @@ function calendarInit()
         });
 
         getHours(new Date());
-        $('#selected-date').val(moment().format('DD.MM.YYYY'));
+        $('#selected-date').val(moment().format('YYYY-MM-DD'));
         //My function to intialize the datepicker
-        $('#booking-calendar').datepicker({
+        $('#appointment-calendar').datepicker({
             inline: true,
             minDate: 0,
             firstDay:1,
@@ -47,16 +47,16 @@ function highlightDays(date)
 
 /**
  * Gets times available for the day selected
- * Populates the daytimes id with dates available
+ * Populates the day-times id with dates available
  */
 function getHours(date)
 {
     var dateSelected = moment(date).startOf('d');
-    $('#selected-date').val(dateSelected.format('DD.MM.YYYY'));
+    $('#selected-date').val(dateSelected.format('YYYY-MM-DD'));
     //calculate the hours and after that remove already taken
     var schedule = $.grep(schedules, function(s){return moment(s.work_date).isSame(dateSelected)});
     var hours = [];
-    $.get(url+"/int/appointment/"+dentistId+"/"+date, function(data) {
+    $.get(url+"/int/appointment/"+dentistId+"/"+moment(date).format('YYYY-MM-DD'), function(data) {
         var reservedHours = [];
         $.each(data, function(index, value) {
             reservedHours.push(moment(value.appointment_date + 'T' + value.appointment_time));
@@ -83,9 +83,9 @@ function getHours(date)
             }
         });
         document.getElementById('daySelect').innerHTML = "Свободни часове за " + dateSelected.format("DD.MM.YYYY");
-        $('#dayTimes').empty();
+        $('#day-times').empty();
         $.each(hours, function(i, v){
-            $("#dayTimes").append('<a id="'+ v +'" onclick="selectTime(this.id)">' + v + '</a><br>');
+            $("#day-times").append('<a id="'+ v +'" onclick="selectTime(this.id)">' + v + '</a><br>');
         });
     });
 }

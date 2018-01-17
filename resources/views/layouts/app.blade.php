@@ -16,7 +16,7 @@
     <!-- Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script src="{{ asset('/js/booking-calendar.js') }}"></script>
+    <script src="{{ asset('/js/appointment-calendar.js') }}"></script>
     <script src="{{ asset('/js/moment.js') }}"></script>
 
 </head>

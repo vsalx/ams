@@ -17,10 +17,10 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'dentist', 'middleware' => 'auth'], function(){
-    Route::get('/{dentistId}/appointment', 'DentistAppointmentController@getAppointmentView');
-    Route::post('/{dentistId}/appointment', 'DentistAppointmentController@createAppointment');
+    Route::post('/{dentistId}/appointment', 'DentistController@createAppointment');
+    Route::post('/{dentistId}/review', 'DentistController@createReview');
+    Route::get('/{dentistId}', 'DentistController@getDentistProfile');
 });
-
 
 Auth::routes();
 

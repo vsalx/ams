@@ -13,11 +13,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script src="{{ asset('/js/app.js') }}"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{ asset('/js/moment.js') }}"></script>
-    @yield('scripts')
 </head>
 <body>
     <div id="app">
@@ -81,4 +76,10 @@
     </div>
 
 </body>
+
+<!-- Scripts -->
+<script src="{{ asset('/js/app.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{ asset('/js/moment.js') }}"></script>
+@yield('scripts')
 </html>

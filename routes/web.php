@@ -13,10 +13,10 @@
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('auth');
 
 
-Route::group(['prefix' => 'dentist'], function(){
+Route::group(['prefix' => 'dentist', 'middleware' => 'auth'], function(){
     Route::get('/{dentistId}/appointment', 'DentistAppointmentController@getAppointmentView');
     Route::post('/{dentistId}/appointment', 'DentistAppointmentController@createAppointment');
 });
@@ -24,9 +24,7 @@ Route::group(['prefix' => 'dentist'], function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group(['prefix' => 'int'], function()
+Route::group(['prefix' => 'int', 'middleware' => 'auth'], function()
 {
     Route::get('/schedule/{dentistId}', 'InternalController@getSchedulesByDentistId');
     Route::get('/appointment/{dentistId}/{date}', 'InternalController@getScheduledAppointmentsByDentistId');

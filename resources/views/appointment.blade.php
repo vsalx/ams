@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('scripts')
+    <script src="{{ asset('/js/appointment-calendar.js') }}"></script>
+@endsection
 @section('content')
 <div class="container">
     <div class="row">

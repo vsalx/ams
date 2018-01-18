@@ -14,11 +14,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script src="{{ asset('/js/appointment-calendar.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{ asset('/js/moment.js') }}"></script>
-
+    @yield('scripts')
 </head>
 <body>
     <div id="app">

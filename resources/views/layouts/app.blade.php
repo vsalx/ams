@@ -37,7 +37,6 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -74,12 +73,10 @@
 
         @yield('content')
     </div>
-
+    <!-- Scripts -->
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{ asset('/js/moment.js') }}"></script>
+    @yield('scripts')
 </body>
-
-<!-- Scripts -->
-<script src="{{ asset('/js/app.js') }}"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script src="{{ asset('/js/moment.js') }}"></script>
-@yield('scripts')
 </html>

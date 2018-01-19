@@ -11,14 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
+Route::get('/', 'HomeController@index')->middleware('auth');
 
 
 Route::group(['prefix' => 'dentist', 'middleware' => 'auth'], function(){
     Route::post('/{dentistId}/appointment', 'DentistController@createAppointment');
     Route::post('/{dentistId}/review', 'DentistController@createReview');
+    Route::post('/search', 'DentistController@search');
     Route::get('/{dentistId}', 'DentistController@getDentistProfile');
 });
 

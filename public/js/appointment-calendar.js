@@ -16,7 +16,7 @@ function calendarInit()
 
         getHours(new Date());
         $('#selected-date').val(moment().format('YYYY-MM-DD'));
-        //My function to intialize the datepicker
+
         $('#appointment-calendar').datepicker({
             inline: true,
             minDate: 0,
@@ -24,6 +24,7 @@ function calendarInit()
             dateFormat: 'yy-mm-dd',
             beforeShowDay: highlightDays,
             onSelect: getHours,
+            numberOfMonths:1
         });
     });
 }
@@ -82,7 +83,7 @@ function getHours(date)
                 }
             }
         });
-        document.getElementById('daySelect').innerHTML = "Свободни часове за " + dateSelected.format("DD.MM.YYYY");
+        document.getElementById('daySelect').innerHTML = "Available hours for " + dateSelected.format("DD.MM.YYYY");
         $('#day-times').empty();
         $.each(hours, function(i, v){
             $("#day-times").append('<a id="'+ v +'" onclick="selectTime(this.id)">' + v + '</a><br>');

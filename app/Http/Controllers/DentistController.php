@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
 use App\Review;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DentistController extends Controller
 {
@@ -18,6 +20,18 @@ class DentistController extends Controller
     }
 
     public function createAppointment(Request $request, $dentistId) {
+
+        $validator = Validator::make($request->all(), [
+            'time' => 'required',
+            'date' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $user = Auth::user();
         $appointment = new Appointment();
         $appointment->appointment_date = $request->date;
@@ -26,10 +40,21 @@ class DentistController extends Controller
         $appointment->customer_id = $user->getAuthIdentifier();
         $appointment->save();
 
-        return redirect()->back()->with('message','Часът беше запазен успешно!');
+        return redirect()->back()->with('appointment_status','Appointment created successfuly!');
     }
 
     public function createReview(Request $request, $dentistId){
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required|max:255',
+            'rating' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $reviewer = Auth::user();
         $review = new Review();
         $review->user_id = $dentistId;
@@ -39,5 +64,26 @@ class DentistController extends Controller
         $review->save();
 
         return redirect()->back();
+    }
+
+    public function search(Request $request) {
+        $query = User::query();
+        if($request->has('name')) {
+            $query->whereRaw('LOWER(name) like ?', strtolower('%'.$request->name.'%'));
+        }
+        if ($request->has('city')){
+            $query->whereRaw('LOWER(city) like ?', strtolower('%'.$request->city.'%'));
+        }
+        if($request->has('type')){
+            $query->where('type', '=', $request->type);
+        } else {
+            $query->where('type', '!=', 'CUSTOMER');
+        }
+        if($request->has('rating')) {
+            //todo make it work :D
+            $query->with('reviews.rating')->groupBy('reviews.rating')->havingRaw('AVG(reviews.rating >='.$request->rating);
+        }
+
+        return redirect()->back()->with('search_result', $query->get());
     }
 }

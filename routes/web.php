@@ -30,3 +30,8 @@ Route::group(['prefix' => 'int', 'middleware' => 'auth'], function()
     Route::get('/schedule/{dentistId}', 'InternalController@getSchedulesByDentistId');
     Route::get('/appointment/{dentistId}/{date}', 'InternalController@getScheduledAppointmentsByDentistId');
 });
+
+//Mail routes
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');

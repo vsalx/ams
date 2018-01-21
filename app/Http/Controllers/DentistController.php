@@ -39,7 +39,7 @@ class DentistController extends Controller
         $appointment->dentist_id = $dentistId;
         $appointment->customer_id = $user->getAuthIdentifier();
         $appointment->save();
-
+        //TODO send email notification
         return redirect()->back()->with('appointment_status','Appointment created successfuly!');
     }
 

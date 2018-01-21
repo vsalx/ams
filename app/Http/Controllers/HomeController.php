@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -27,6 +27,17 @@ class HomeController extends Controller
     {
         $userId = Auth::user()->getAuthIdentifier();
         $user = User::find($userId);
-        return view('home')->with('user', $user);
+        $appointments = Appointment::query();
+        if($user->type == 'CUSTOMER') {
+            $appointments->where('customer_id', '=', $userId);
+        } else {
+            $appointments->where('dentist_id', '=', $userId);
+        }
+        $appointments = $appointments
+            ->with('customer')
+            ->with('dentist')
+            ->whereRaw("str_to_date(concat(appointment_date,' ',appointment_time), '%Y-%m-%d %H:%i') >= now()")
+        ->get();
+        return view('home')->with('user', $user)->with('appointments', $appointments);
     }
 }

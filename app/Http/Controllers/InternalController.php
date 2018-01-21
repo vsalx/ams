@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
-use Illuminate\Http\Request;
 use App\WorkSchedule;
 
 class InternalController extends Controller
@@ -14,7 +13,10 @@ class InternalController extends Controller
     }
 
     function getScheduledAppointmentsByDentistId($dentistId, $date) {
-        $scheduled = Appointment::where('dentist_id', '=', $dentistId)->where('appointment_date', '=', $date)->get();
+        $scheduled = Appointment::where('dentist_id', '=', $dentistId)
+            ->where('appointment_date', '=', $date)
+            ->where('cancelled_by', '=', null)
+            ->get();
         return response()->json($scheduled);
     }
 }

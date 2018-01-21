@@ -21,6 +21,8 @@ Route::group(['prefix' => 'dentist', 'middleware' => 'auth'], function(){
     Route::get('/{dentistId}', 'DentistController@getDentistProfile');
 });
 
+Route::get('/appointment/{id}/cancel', 'AppointmentController@cancel');
+
 Auth::routes();
 
 Route::group(['prefix' => 'int', 'middleware' => 'auth'], function()

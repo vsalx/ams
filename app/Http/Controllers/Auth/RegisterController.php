@@ -42,7 +42,6 @@ class RegisterController extends Controller
 
     function get_enum_values($table, $field)
     {
-        //todo maybe make this smarter
         $test=DB::select(DB::raw("show columns from {$table} where field = '{$field}'"));
 
         preg_match('/^enum\((.*)\)$/', $test[0]->Type, $matches);

@@ -38,8 +38,9 @@ class HomeController extends Controller
             ->with('dentist')
             ->whereRaw("str_to_date(concat(appointment_date,' ',appointment_time), '%Y-%m-%d %H:%i') >= now()")
         ->get();
-        $email = Auth::user()->email;
-        Mail::to($email)->send(new DemoMail());
+        //TODO throws error on new DemoMail
+        //$email = Auth::user()->email;
+        //Mail::to($email)->send(new DemoMail());
         return view('home')->with('user', $user)->with('appointments', $appointments);
     }
 }

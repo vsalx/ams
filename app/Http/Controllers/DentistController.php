@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Appointment;
 use App\Review;
 use App\User;
+use App\WorkSchedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -85,5 +87,35 @@ class DentistController extends Controller
         }
 
         return redirect()->back()->with('search_result', $query->get());
+    }
+
+    public function createSchedule(Request $request, $dentistId) {
+        $validator = Validator::make($request->all(), [
+            'date' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->with('schedule_validation', 'All fields are required!');
+        }
+
+        $startTime = Carbon::createFromFormat('Y-m-d H:i', $request->date . ' ' . $request->start_time, 'Europe/Sofia');
+        $endTime = Carbon::createFromFormat('Y-m-d H:i', $request->date . ' ' . $request->end_time, 'Europe/Sofia');
+
+        if($startTime->gte($endTime)) {
+            return redirect()->back()->with('schedule_validation', 'End time should be after start time!');
+        }
+
+        $schedule = WorkSchedule::create([
+            'dentist_id' => Auth::user()->getAuthIdentifier(),
+            'work_date' => $request->date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time
+        ]);
+
+        $schedule->save();
+
+        return redirect()->back()->with('schedule_created', 'Schedule created successfuly!');
     }
 }

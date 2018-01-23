@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Appointment;
 use App\User;
+use App\WorkSchedule;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -41,6 +42,11 @@ class HomeController extends Controller
         //TODO throws error on new DemoMail
         //$email = Auth::user()->email;
         //Mail::to($email)->send(new DemoMail());
-        return view('home')->with('user', $user)->with('appointments', $appointments);
+        if($user->type != 'CUSTOMER') {
+            $schedule = WorkSchedule::where('dentist_id', '=', $user->id)
+                ->whereRaw("str_to_date(concat(work_date,' ',start_time), '%Y-%m-%d %H:%i') >= now()")
+                ->get();
+        }
+        return view('home')->with('user', $user)->with('appointments', $appointments)->with('schedules', isset($schedule) ? $schedule : null);
     }
 }

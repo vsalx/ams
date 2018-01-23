@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('scripts')
+    <script src="{{ asset('/js/schedule.js') }}"></script>
+@endsection
 @section('content')
     <div class="container">
         <div class="row">
@@ -12,15 +14,14 @@
                     @endif
 
                     @include('home.appointments')
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-md-offset-0">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Search for @if($user->type == 'CUSTOMER') dentist @else customer @endif</div>
-                    <div class="panel-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-0">
+                    <div class="panel panel-default">
+
                         @if($user->type == 'CUSTOMER')
                             @include('home.customer')
                         @else
@@ -29,6 +30,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 @endsection

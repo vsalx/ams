@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class WorkSchedule extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
-        'dentist_id', 'start_time', 'end_time'
+        'dentist_id', 'work_date', 'start_time', 'end_time'
     ];
 }

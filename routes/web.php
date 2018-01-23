@@ -18,10 +18,11 @@ Route::group(['prefix' => 'dentist', 'middleware' => 'auth'], function(){
     Route::post('/{dentistId}/appointment', 'DentistController@createAppointment');
     Route::post('/{dentistId}/review', 'DentistController@createReview');
     Route::post('/search', 'DentistController@search');
+    Route::post('{dentistId}/schedule', 'DentistController@createSchedule');
     Route::get('/{dentistId}', 'DentistController@getDentistProfile');
 });
 
-Route::get('/appointment/{id}/cancel', 'AppointmentController@cancel');
+Route::get('/appointment/{id}/cancel', 'AppointmentController@cancel')->middleware('auth');
 
 Auth::routes();
 

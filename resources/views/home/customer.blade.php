@@ -1,4 +1,6 @@
-<form method="post" action="/dentist/search">
+<div class="panel-heading">Search for dentist</div>
+<div class="panel-body">
+    <form method="post" action="/dentist/search">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-3">
@@ -62,3 +64,5 @@
         <div class="alert alert-warning"><p>The search returned no results.</p></div>
     @endif
 @endif
+</div>
+</div>

@@ -44,7 +44,7 @@ class HomeController extends Controller
         //Mail::to($email)->send(new DemoMail());
         if($user->type != 'CUSTOMER') {
             $schedule = WorkSchedule::where('dentist_id', '=', $user->id)
-                ->whereRaw("str_to_date(concat(work_date,' ',start_time), '%Y-%m-%d %H:%i') >= now()")
+                ->whereRaw("str_to_date(concat(work_date,' ',end_time), '%Y-%m-%d %H:%i') >= now()")
                 ->get();
         }
         return view('home')->with('user', $user)->with('appointments', $appointments)->with('schedules', isset($schedule) ? $schedule : null);

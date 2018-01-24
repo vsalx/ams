@@ -1,4 +1,4 @@
-var url = "http://localhost:8000";
+var url = window.location.host;
 var schedules = [];
 var dentistId;
 
@@ -9,7 +9,7 @@ $(document).ready(function($){
 function calendarInit()
 {
     dentistId = $('#dentist span').attr('id');
-    $.get(url+"/int/schedule/" + dentistId, function(data) {
+    $.get("/int/schedule/" + dentistId, function(data) {
         $.each(data, function(index, value) {
             schedules.push(value);
         });
@@ -57,7 +57,7 @@ function getHours(date)
     //calculate the hours and after that remove already taken
     var schedule = $.grep(schedules, function(s){return moment(s.work_date).isSame(dateSelected)});
     var hours = [];
-    $.get(url+"/int/appointment/"+dentistId+"/"+moment(date).format('YYYY-MM-DD'), function(data) {
+    $.get("/int/appointment/"+dentistId+"/"+moment(date).format('YYYY-MM-DD'), function(data) {
         var reservedHours = [];
         $.each(data, function(index, value) {
             reservedHours.push(moment(value.appointment_date + 'T' + value.appointment_time));

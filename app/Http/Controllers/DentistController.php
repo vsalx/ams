@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Validator;
 class DentistController extends Controller
 {
     public function getDentistProfile($dentistId){
-        $dentist = User::with('reviews.reviewer')->where('id', '=', $dentistId)->where('type', '!=', 'CUSTOMER')->first();
+        $dentist = User::with('reviews.reviewer')
+            ->where('id', '=', $dentistId)
+            ->where('type', '!=', 'CUSTOMER')
+            ->first();
         if($dentist == null) {
             return abort(404);
         }

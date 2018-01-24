@@ -28,6 +28,6 @@ class User extends Authenticatable
     ];
 
     public function reviews(){
-        return $this->hasMany('App\Review', 'user_id');
+        return $this->hasMany('App\Review', 'user_id')->orderBy('id', 'desc');
     }
 }

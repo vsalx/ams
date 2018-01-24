@@ -38,6 +38,8 @@ class HomeController extends Controller
             ->with('customer')
             ->with('dentist')
             ->whereRaw("str_to_date(concat(appointment_date,' ',appointment_time), '%Y-%m-%d %H:%i') >= now()")
+            ->orderBy('appointment_date', 'asc')
+            ->orderBy('appointment_time', 'asc')
         ->get();
         //TODO throws error on new DemoMail
         //$email = Auth::user()->email;
@@ -45,6 +47,8 @@ class HomeController extends Controller
         if($user->type != 'CUSTOMER') {
             $schedule = WorkSchedule::where('dentist_id', '=', $user->id)
                 ->whereRaw("str_to_date(concat(work_date,' ',end_time), '%Y-%m-%d %H:%i') >= now()")
+                ->orderBy('work_date', 'asc')
+                ->orderBy('start_time', 'asc')
                 ->get();
         }
         return view('home')->with('user', $user)->with('appointments', $appointments)->with('schedules', isset($schedule) ? $schedule : null);

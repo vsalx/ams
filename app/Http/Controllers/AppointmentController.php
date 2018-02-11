@@ -7,6 +7,7 @@ use App\AppointmentDetails;
 use App\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Mail;
 
 class AppointmentController extends Controller
 {
@@ -26,10 +27,16 @@ class AppointmentController extends Controller
                 'price' => '10.00',
                 'appointment_id' => $appointmentId
             ]);
+
             $fee->save();
         }
 
-        //TODO send email notification
+        Mail::send('emails.cancel_appointments', ['user' => $user, 'appointment' => $appointment], function($message) use ($user, $appointment)
+        {
+            $message->from('amsprojectnbu@gmail.com', "amsprojectnbu");
+            $message->subject("Cancelled appointment");
+            $message->to($user->email);
+        });
 
         return redirect()->back()->with('status', isset($fee) ? 'Appointment cancelled with fee 10 euro!' : 'Appointment cancelled!');
     }

@@ -6,10 +6,13 @@ use App\Appointment;
 use App\Review;
 use App\User;
 use App\WorkSchedule;
+use App\Blacklist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Mail;
+use DB;
 
 class DentistController extends Controller
 {
@@ -44,7 +47,14 @@ class DentistController extends Controller
         $appointment->dentist_id = $dentistId;
         $appointment->customer_id = $user->getAuthIdentifier();
         $appointment->save();
-        //TODO send email notification
+        
+        Mail::send('emails.create_appointment', ['user' => $user, 'appointment' => $appointment], function($message) use ($user, $appointment)
+        {
+            $message->from('amsprojectnbu@gmail.com', "amsprojectnbu");
+            $message->subject("Created appointment");
+            $message->to($user->email);
+        });
+
         return redirect()->back()->with('appointment_status','Appointment created successfuly!');
     }
 
@@ -120,5 +130,20 @@ class DentistController extends Controller
         $schedule->save();
 
         return redirect()->back()->with('schedule_created', 'Schedule created successfuly!');
+    }
+
+    public function saveDentistToBlacklist(Request $request, $reportedBy) {
+        $user = Auth::user();
+        $blacklist = new Blacklist();
+        $blacklist->user_id = $reportedBy;
+        $blacklist->reporter_id = $user->getAuthIdentifier();
+        $blacklist->save();
+
+        return redirect()->back()->with('saved_to_blacklist', 'Successfully added to blacklist!');
+    }
+
+    public function removeDentistFromBlacklist(Request $request) {
+        DB::table('blacklists')->where('reporter_id', '=', Auth::user()->getAuthIdentifier())->delete();
+        return redirect()->back()->with('saved_to_blacklist', 'Successfully added to blacklist!');
     }
 }

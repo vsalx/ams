@@ -118,6 +118,23 @@
                         </form>
                     </div>
                 </div>
+
+                <form method="post" action="/dentist/{{$dentist->id}}/blacklist">
+                {{ csrf_field() }}
+                            <div class="form-group row col-md-1">
+                                <button id="save-blacklist" type="submit" class="btn btn-primary">Save in blacklist
+                                </button>
+                            </div>
+                </form>
+                
+                <form method="post" action="/dentist/{{$dentist->id}}/blacklist">
+                {{ csrf_field() }}
+                            <div class="form-group row col-md-1">
+                                <button id="remove-blacklist" type="submit" class="btn btn-primary">Remove from blacklist
+                                </button>
+                            </div>
+                            </form>
+
                 <h2>Reviews</h2>
                 @foreach($dentist->reviews as $review)
                     <div class="panel panel-info">

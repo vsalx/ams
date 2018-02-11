@@ -6,8 +6,14 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
-
                 <div class="panel-body">
+                    @if (session('error'))
+                        <div class="row">
+                        <div class="col-md-12 center-block">
+                            <div class="alert alert-danger col-md-5">
+                                {{ session('error') }}
+                            </div></div></div>
+                    @endif
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 

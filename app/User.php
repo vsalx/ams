@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function reviews(){
         return $this->hasMany('App\Review', 'user_id')->orderBy('id', 'desc');
     }
+
+    public function blacklistedCount() {
+        return $this->hasMany('App\Blacklist','user_id')->count();
+    }
 }

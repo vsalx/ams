@@ -1,18 +1,3 @@
-    <div class="panel-heading">Search for customer</div>
-    <div class="panel-body">
-    <form method="post" action="/customer/search">
-    {{ csrf_field() }}
-    <div class="row">
-        <div class="col-md-3">
-            <input name="name" class="form-control" placeholder="Name"/>
-        </div>
-        <div class="col-md-3">
-            <input name="city" class="form-control" placeholder="City"/>
-        </div>
-        <div class="col-md-1">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </div>
     </form>
     <div class="panel-heading">Enter work schedule</div>
     <hr/>

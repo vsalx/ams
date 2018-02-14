@@ -54,6 +54,14 @@ class DentistController extends Controller
             $message->subject("Created appointment");
             $message->to($user->email);
         });
+        
+        $dentistObject = User::find( $dentistId);
+        Mail::send('emails.dentist_appointment', ['dentistObject' => $dentistObject, 'appointment' => $appointment], function($message) use ($dentistObject, $appointment)
+        {
+            $message->from('amsprojectnbu@gmail.com', "amsprojectnbu");
+            $message->subject("Created appointment");
+            $message->to($dentistObject->email);
+        });
 
         return redirect()->back()->with('appointment_status','Appointment created successfuly!');
     }
@@ -144,6 +152,6 @@ class DentistController extends Controller
 
     public function removeDentistFromBlacklist(Request $request) {
         DB::table('blacklists')->where('reporter_id', '=', Auth::user()->getAuthIdentifier())->delete();
-        return redirect()->back()->with('saved_to_blacklist', 'Successfully added to blacklist!');
+        return redirect()->back()->with('remove_from_blacklist', 'Successfully removed from blacklist!');
     }
 }

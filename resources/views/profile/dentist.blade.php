@@ -119,23 +119,7 @@
                     </div>
                 </div>
 
-                <form method="post" action="/dentist/{{$dentist->id}}/blacklist">
-                {{ csrf_field() }}
-                            <div class="form-group row col-md-1">
-                                <button id="save-blacklist" type="submit" class="btn btn-primary">Save in blacklist
-                                </button>
-                            </div>
-                </form>
-                
-                <form method="post" action="/dentist/{{$dentist->id}}/blacklist">
-                {{ csrf_field() }}
-                            <div class="form-group row col-md-1">
-                                <button id="remove-blacklist" type="submit" class="btn btn-primary">Remove from blacklist
-                                </button>
-                            </div>
-                            </form>
-
-                <h2>Reviews</h2>
+                 <h2>Reviews</h2>
                 @foreach($dentist->reviews as $review)
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -147,6 +131,31 @@
                         </div>
                     </div>
                 @endforeach
+
+
+   @if(session('saved_to_blacklist'))
+        <div class="alert alert-danger">{{session('saved_to_blacklist')}}</div>
+    @endif
+
+    @if(session('remove_from_blacklist'))
+        <div class="alert alert-info">{{session('remove_from_blacklist')}}</div>
+    @endif
+                <form method="post" action="/dentist/{{$dentist->id}}/blacklist">
+                {{ csrf_field() }}  
+                            <div class="form-group row col-md-9">
+                                <button id="save-blacklist" type="submit" class="btn btn-danger">Save in blacklist
+                                </button>
+                            </div>
+                </form>
+
+                <form method="post" action="/dentist/{{$dentist->id}}/blacklistRemove">
+                {{ csrf_field() }}  
+
+                            <div class="form-group row col-md-1">
+                                <button id="remove-blacklist" type="submit" class="btn btn-primary">Remove from blacklist
+                                </button>
+                            </div>
+                </form>
             </div>
         </div>
     </div>

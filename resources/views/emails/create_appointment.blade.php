@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Appointment Created by {{$user['name']}}</title>
-</head>
+
  
 <body>
-Hello,
-You have appointment by {{$user['name']}} for {{$appointment['appointment_date']}}
+<p>Hello,</p>
+<p>You have appointment for {{$appointment['appointment_date']}}</p>
 
-AMS System
+<p>AMS System</p>
 </body>
  
 </html>

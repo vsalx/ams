@@ -31,11 +31,19 @@ class AppointmentController extends Controller
             $fee->save();
         }
 
-        Mail::send('emails.cancel_appointments', ['user' => $user, 'appointment' => $appointment], function($message) use ($user, $appointment)
+        Mail::send('emails.cancel_appointment', ['user' => $user, 'appointment' => $appointment], function($message) use ($user, $appointment)
         {
             $message->from('amsprojectnbu@gmail.com', "amsprojectnbu");
             $message->subject("Cancelled appointment");
             $message->to($user->email);
+        });
+
+        $dentistObject = User::find( $appointment->dentist_id);
+        Mail::send('emails.dentist_cancel_appointment', ['dentistObject' => $dentistObject, 'appointment' => $appointment], function($message) use ($dentistObject, $appointment)
+        {
+            $message->from('amsprojectnbu@gmail.com', "amsprojectnbu");
+            $message->subject("Created appointment");
+            $message->to($dentistObject->email);
         });
 
         return redirect()->back()->with('status', isset($fee) ? 'Appointment cancelled with fee 10 euro!' : 'Appointment cancelled!');

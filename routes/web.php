@@ -21,7 +21,7 @@ Route::group(['prefix' => 'dentist', 'middleware' => 'auth'], function(){
     Route::post('{dentistId}/schedule', 'DentistController@createSchedule');
     Route::get('/{dentistId}', 'DentistController@getDentistProfile');
     Route::post('/{dentistId}/blacklist', 'DentistController@saveDentistToBlacklist');
-    Route::post('/{dentistId}/blacklist', 'DentistController@removeDentistFromBlacklist');
+    Route::post('/{dentistId}/blacklistRemove', 'DentistController@removeDentistFromBlacklist');
 });
 
 Route::get('/appointment/{id}/cancel', 'AppointmentController@cancel')->middleware('auth');
@@ -33,5 +33,3 @@ Route::group(['prefix' => 'int', 'middleware' => 'auth'], function()
     Route::get('/schedule/{dentistId}', 'InternalController@getSchedulesByDentistId');
     Route::get('/appointment/{dentistId}/{date}', 'InternalController@getScheduledAppointmentsByDentistId');
 });
-
-//Mail routes

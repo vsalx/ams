@@ -42,7 +42,7 @@ class AppointmentController extends Controller
         Mail::send('emails.dentist_cancel_appointment', ['dentistObject' => $dentistObject, 'appointment' => $appointment], function($message) use ($dentistObject, $appointment)
         {
             $message->from('amsprojectnbu@gmail.com', "amsprojectnbu");
-            $message->subject("Created appointment");
+            $message->subject("Cancelled appointment");
             $message->to($dentistObject->email);
         });
 

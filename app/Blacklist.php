@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Blacklist extends Model
 {
     public $timestamps = false;
-    public $table = "ams.blacklists";
+    public $table = 'blacklists';
     protected $fillable = [
         'user_id', 'reporter_id'
     ];
